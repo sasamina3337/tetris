@@ -292,7 +292,7 @@ namespace tetris
             {
                 for (int j = 0; j < mino.GetLength(3); j++)
                 {
-                    board[i + minoRow, j + minoCol] = mino[randomMino, 1, i, j];
+                    board[i + minoRow, j + minoCol] = mino[randomMino, 0, i, j];
                 }
             }
 
