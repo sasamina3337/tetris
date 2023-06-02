@@ -4,7 +4,8 @@ namespace tetris
 {
     public partial class Form1 : Form
     {
-        public int[,] board = new int[22, 12]
+        public int minoRow, minoCol, randomMino;
+        public int[,] firstBoard = new int[22, 12]
             {
                 { 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8 },
                 { 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8 },
@@ -29,9 +30,10 @@ namespace tetris
                 { 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8 },
                 { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 }
             };
+        public int[,] board = new int[22, 12];
 
 
-        public int[,,,] mino = new int[8,4,4,4]
+        public int[,,,] mino = new int[8, 4, 4, 4]
         {
             { //なにもない
                 { //上
@@ -256,7 +258,7 @@ namespace tetris
             boarder = 8
         }
 
-        public Dictionary<minoColor, Color> stoneImg = new Dictionary<minoColor, Color>()
+        public Dictionary<minoColor, Color> minoBackColor = new Dictionary<minoColor, Color>()
         {
             {minoColor.none, Color.DarkGray},
             {minoColor.i, Color.Cyan},
@@ -272,8 +274,49 @@ namespace tetris
         public Form1()
         {
             InitializeComponent();
+            //ランダムにミノの種類を選択
+            Random random = new Random();
+            randomMino = random.Next(1, 8);
+
+            //初期のミノの位置
+            minoRow = 0;
+            minoCol = 4;
+            timer.Start();
         }
 
+        private void timerTick(object sender, EventArgs e)
+        {
+            //ミノの位置を時間で変化
+            board = firstBoard;
+            for (int i = 0; i < mino.GetLength(2); i++)
+            {
+                for (int j = 0; j < mino.GetLength(3); j++)
+                {
+                    board[i + minoRow, j + minoCol] = mino[randomMino, 1, i, j];
+                }
+            }
 
+            if (board.GetLength(0) - minoRow > 5) minoRow++;
+
+            Drow(board);
+
+        }
+
+        public void Drow(int[,] n)
+        {
+            Control[] c;
+            PictureBox pic;
+            string boxName;
+            for (int i = 1; i < board.GetLength(0); i++)
+            {
+                for (int j = 1; j < board.GetLength(1); j++)
+                {
+                    boxName = Convert.ToString(i * board.GetLength(1) + j);
+                    c = this.Controls.Find("pictureBox" + boxName, true);
+                    pic = (PictureBox)c[0];
+                    pic.BackColor = minoBackColor[(minoColor)n[i, j]];
+                }
+            }
+        }
     }
 }

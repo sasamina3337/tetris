@@ -28,18 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox0 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox1 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox2 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox3 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox4 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox5 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox6 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox7 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox8 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox9 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox10 = (new global::System.Windows.Forms.PictureBox());
-            this.pictureBox11 = (new global::System.Windows.Forms.PictureBox());
+            this.components = (new global::System.ComponentModel.Container());
             this.pictureBox12 = (new global::System.Windows.Forms.PictureBox());
             this.pictureBox13 = (new global::System.Windows.Forms.PictureBox());
             this.pictureBox14 = (new global::System.Windows.Forms.PictureBox());
@@ -292,18 +281,7 @@
             this.pictureBox261 = (new global::System.Windows.Forms.PictureBox());
             this.pictureBox262 = (new global::System.Windows.Forms.PictureBox());
             this.pictureBox263 = (new global::System.Windows.Forms.PictureBox());
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            this.timer = (new global::System.Windows.Forms.Timer(this.components));
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
@@ -557,126 +535,6 @@
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox262)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox263)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox0
-            // 
-            this.pictureBox0.BackColor = (global::System.Drawing.Color.Black);
-            this.pictureBox0.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox0.Location = (new global::System.Drawing.Point(115, 72));
-            this.pictureBox0.Name = ("pictureBox0");
-            this.pictureBox0.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox0.TabIndex = (0);
-            this.pictureBox0.TabStop = (false);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox1.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox1.Location = (new global::System.Drawing.Point(140, 72));
-            this.pictureBox1.Name = ("pictureBox1");
-            this.pictureBox1.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox1.TabIndex = (1);
-            this.pictureBox1.TabStop = (false);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox2.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox2.Location = (new global::System.Drawing.Point(165, 72));
-            this.pictureBox2.Name = ("pictureBox2");
-            this.pictureBox2.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox2.TabIndex = (2);
-            this.pictureBox2.TabStop = (false);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox3.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox3.Location = (new global::System.Drawing.Point(190, 72));
-            this.pictureBox3.Name = ("pictureBox3");
-            this.pictureBox3.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox3.TabIndex = (3);
-            this.pictureBox3.TabStop = (false);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox4.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox4.Location = (new global::System.Drawing.Point(215, 72));
-            this.pictureBox4.Name = ("pictureBox4");
-            this.pictureBox4.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox4.TabIndex = (4);
-            this.pictureBox4.TabStop = (false);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox5.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox5.Location = (new global::System.Drawing.Point(240, 72));
-            this.pictureBox5.Name = ("pictureBox5");
-            this.pictureBox5.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox5.TabIndex = (5);
-            this.pictureBox5.TabStop = (false);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox6.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox6.Location = (new global::System.Drawing.Point(265, 72));
-            this.pictureBox6.Name = ("pictureBox6");
-            this.pictureBox6.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox6.TabIndex = (6);
-            this.pictureBox6.TabStop = (false);
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox7.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox7.Location = (new global::System.Drawing.Point(290, 72));
-            this.pictureBox7.Name = ("pictureBox7");
-            this.pictureBox7.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox7.TabIndex = (7);
-            this.pictureBox7.TabStop = (false);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox8.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox8.Location = (new global::System.Drawing.Point(315, 72));
-            this.pictureBox8.Name = ("pictureBox8");
-            this.pictureBox8.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox8.TabIndex = (8);
-            this.pictureBox8.TabStop = (false);
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox9.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox9.Location = (new global::System.Drawing.Point(340, 72));
-            this.pictureBox9.Name = ("pictureBox9");
-            this.pictureBox9.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox9.TabIndex = (9);
-            this.pictureBox9.TabStop = (false);
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.BackColor = (global::System.Drawing.Color.DarkGray);
-            this.pictureBox10.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox10.Location = (new global::System.Drawing.Point(365, 72));
-            this.pictureBox10.Name = ("pictureBox10");
-            this.pictureBox10.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox10.TabIndex = (10);
-            this.pictureBox10.TabStop = (false);
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.BackColor = (global::System.Drawing.Color.Black);
-            this.pictureBox11.BorderStyle = (global::System.Windows.Forms.BorderStyle.FixedSingle);
-            this.pictureBox11.Location = (new global::System.Drawing.Point(390, 72));
-            this.pictureBox11.Name = ("pictureBox11");
-            this.pictureBox11.Size = (new global::System.Drawing.Size(25, 25));
-            this.pictureBox11.TabIndex = (11);
-            this.pictureBox11.TabStop = (false);
             // 
             // pictureBox12
             // 
@@ -3198,6 +3056,11 @@
             this.pictureBox263.TabIndex = (263);
             this.pictureBox263.TabStop = (false);
             // 
+            // timer
+            // 
+            this.timer.Interval = (1000);
+            this.timer.Tick += (this.timerTick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = (new global::System.Drawing.SizeF(7F, 15F));
@@ -3455,32 +3318,8 @@
             this.Controls.Add(this.pictureBox14);
             this.Controls.Add(this.pictureBox13);
             this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pictureBox11);
-            this.Controls.Add(this.pictureBox10);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox8);
-            this.Controls.Add(this.pictureBox7);
-            this.Controls.Add(this.pictureBox6);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.pictureBox0);
             this.Name = ("Form1");
             this.Text = ("Form1");
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox0)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
@@ -3737,19 +3576,6 @@
         }
 
         #endregion
-
-        private PictureBox pictureBox0;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox5;
-        private PictureBox pictureBox6;
-        private PictureBox pictureBox7;
-        private PictureBox pictureBox8;
-        private PictureBox pictureBox9;
-        private PictureBox pictureBox10;
-        private PictureBox pictureBox11;
         private PictureBox pictureBox12;
         private PictureBox pictureBox13;
         private PictureBox pictureBox14;
@@ -4002,5 +3828,6 @@
         private global::System.Windows.Forms.PictureBox pictureBox261;
         private global::System.Windows.Forms.PictureBox pictureBox262;
         private global::System.Windows.Forms.PictureBox pictureBox263;
+        private global::System.Windows.Forms.Timer timer;
     }
 }
