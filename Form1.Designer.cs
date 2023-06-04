@@ -3320,6 +3320,7 @@
             this.Controls.Add(this.pictureBox12);
             this.Name = ("Form1");
             this.Text = ("Form1");
+            this.KeyUp += (this.keyUp);
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
