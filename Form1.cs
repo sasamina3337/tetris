@@ -272,8 +272,6 @@ namespace tetris
             {minoColor.boarder, Color.Black}
         };
 
-        public List<int[]> canSlide = new List<int[]>();
-
         public Form1()
         {
             InitializeComponent();
@@ -286,8 +284,8 @@ namespace tetris
             //ランダムにミノの種類を選択
             Random random = new Random();
             randomMino = random.Next(1, 8);
-            //初期のミノの位置
 
+            //初期のミノの位置
             minoRow = 0;
             minoCol = 5;
             minoRotation = 0;
@@ -308,6 +306,8 @@ namespace tetris
             {
                 minoConflict();
                 Drow(board);
+                //初期ボードに保存
+                shiftBoard(firstBoard, board);
                 timer.Stop();
                 initialSet();
             }
@@ -363,6 +363,7 @@ namespace tetris
                 }
                 minoConflict();
                 Drow(board);
+                shiftBoard(firstBoard, board);
                 timer.Stop();
                 initialSet();
             }
@@ -374,13 +375,8 @@ namespace tetris
             int[,] oneMino = new int[4,4];
 
             //初期化
-            for (int i = 0; i < board.GetLength(0); i++)
-            {
-                for (int j = 0; j < board.GetLength(1); j++)
-                {
-                    board[i, j] = firstBoard[i, j];
-                }
-            }
+            shiftBoard(board, firstBoard);
+            
 
             //まわりの0を消すために選択したminoを取り出す
             for (int i = 0; i < mino.GetLength(2); i++)
@@ -398,7 +394,7 @@ namespace tetris
             {
                 for (int j = 0; j < selectMino.GetLength(1); j++)
                 {
-                    board[i + minoRow, j + minoCol] = selectMino[i, j];
+                    if (selectMino[i, j] != 0) board[i + minoRow, j + minoCol] = selectMino[i, j];
                 }
             }
         }
@@ -468,13 +464,39 @@ namespace tetris
             return true ;
         }
 
+        //下に落ちたときに固まる処理
         public void minoConflict()
         {
+            List<int[]> canSlide = new List<int[]>();
+            for (int i = 0; i < board.GetLength(0); i++)
+            {
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+                    if (board[i, j] != 0 && board[i, j] != 8)
+                    {
+                        int[] addlist = { i, j };
+                        canSlide.Add(addlist);
+                    }
+                }
+            }
+
             for (int i = 0; i < canSlide.Count; i++)
             {
                 int selectRow = canSlide[i][0];
                 int selectCol = canSlide[i][1];
-                board[(selectRow), (selectCol)] = 8;
+                board[selectRow, selectCol] = 8;
+            }
+        }
+
+        //boardの入れ替え
+        public void shiftBoard(int[,] n, int[,] m)
+        {
+            for (int i = 0; i < board.GetLength(0); i++)
+            {
+                for (int j = 0; j < board.GetLength(1); j++)
+                {
+                    n[i, j] = m[i, j];
+                }
             }
         }
     }
