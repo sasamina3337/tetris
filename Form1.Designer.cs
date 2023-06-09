@@ -282,6 +282,8 @@
             this.pictureBox262 = (new global::System.Windows.Forms.PictureBox());
             this.pictureBox263 = (new global::System.Windows.Forms.PictureBox());
             this.timer = (new global::System.Windows.Forms.Timer(this.components));
+            this.T = (new global::System.Windows.Forms.Label());
+            this.label = (new global::System.Windows.Forms.Label());
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
@@ -3061,11 +3063,36 @@
             this.timer.Interval = (500);
             this.timer.Tick += (this.timerTick);
             // 
+            // T
+            // 
+            this.T.AutoSize = (true);
+            this.T.Font = (new global::System.Drawing.Font("Gill Sans Ultra Bold", 27.75F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            this.T.ForeColor = (global::System.Drawing.Color.Gray);
+            this.T.Location = (new global::System.Drawing.Point(177, 9));
+            this.T.Name = ("T");
+            this.T.RightToLeft = (global::System.Windows.Forms.RightToLeft.Yes);
+            this.T.Size = (new global::System.Drawing.Size(179, 51));
+            this.T.TabIndex = (264);
+            this.T.Text = ("TETRIS");
+            // 
+            // label
+            // 
+            this.label.Font = (new global::System.Drawing.Font("Palatino Linotype", 12F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
+            this.label.Location = (new global::System.Drawing.Point(12, 50));
+            this.label.Name = ("label");
+            this.label.RightToLeft = (global::System.Windows.Forms.RightToLeft.Yes);
+            this.label.Size = (new global::System.Drawing.Size(513, 34));
+            this.label.TabIndex = (265);
+            this.label.Text = ("Press The Enter");
+            this.label.TextAlign = (global::System.Drawing.ContentAlignment.MiddleCenter);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = (new global::System.Drawing.SizeF(7F, 15F));
             this.AutoScaleMode = (global::System.Windows.Forms.AutoScaleMode.Font);
             this.ClientSize = (new global::System.Drawing.Size(530, 660));
+            this.Controls.Add(this.label);
+            this.Controls.Add(this.T);
             this.Controls.Add(this.pictureBox263);
             this.Controls.Add(this.pictureBox262);
             this.Controls.Add(this.pictureBox261);
@@ -3574,6 +3601,7 @@
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox262)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox263)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion
@@ -3830,5 +3858,7 @@
         private global::System.Windows.Forms.PictureBox pictureBox262;
         private global::System.Windows.Forms.PictureBox pictureBox263;
         private global::System.Windows.Forms.Timer timer;
+        private global::System.Windows.Forms.Label T;
+        private global::System.Windows.Forms.Label label;
     }
 }

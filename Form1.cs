@@ -1,4 +1,5 @@
 using Microsoft.VisualBasic.ApplicationServices;
+using System.Data;
 
 namespace tetris
 {
@@ -31,6 +32,7 @@ namespace tetris
                 { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8 }
             };
         public int[,] board = new int[22, 12];
+        public int[,] memoryBoard = new int[22, 12];
         public int[,] selectMino;
 
 
@@ -187,9 +189,9 @@ namespace tetris
                 },
                 { //左
                     {0,0,0,0},
-                    {0,0,0,0},
                     {0,0,5,0},
-                    {5,5,5,0}
+                    {0,0,5,0},
+                    {0,5,5,0}
                 },
             },
             { //Lミノ
@@ -246,6 +248,70 @@ namespace tetris
             },
         };
 
+        public int[,,] srsMino = new int[4, 5, 2]
+        {
+            {
+                { 0, 0 },
+                { 0,-2 },
+                {-1,-2 },
+                {-2, 0 },
+                {-2,-1 }
+            },
+            {
+                { 0, 0 },
+                { 0,-1 },
+                {-1,-1 },
+                { 2, 0 },
+                { 2,-1 }
+            },
+            {
+                { 0, 0 },
+                { 0,-1 },
+                {-1, 1 },
+                { 2, 0 },
+                { 2, 1 }
+            },
+            {
+                { 0, 0 },
+                { 0,-1 },
+                {-1, 1 },
+                { 2, 0 },
+                { 2, 1 }
+            }
+        };
+
+        public int[,,] srsIMino = new int[4, 5, 2]
+        {
+            {
+                { 0, 0 },
+                { 0,-2 },
+                { 0, 1 },
+                { 2, 1 },
+                {-1,-2 }
+            },
+            {
+                { 0, 0 },
+                { 0,-1 },
+                { 0, 2 },
+                {-2,-1 },
+                { 1, 2 }
+            },
+            {
+                { 0, 0 },
+                { 0, 2 },
+                { 0,-1 },
+                {-1, 3 },
+                { 2,-1 }
+            },
+            {
+                { 0, 0 },
+                { 0,-2 },
+                { 0, 1 },
+                { 2, 1 },
+                {-1,-2 }
+            }
+        };
+
         public enum minoColor
         {
             none = 0,
@@ -275,7 +341,6 @@ namespace tetris
         public Form1()
         {
             InitializeComponent();
-            initialSet();
         }
 
         //初期設定
@@ -294,7 +359,7 @@ namespace tetris
 
         private void timerTick(object sender, EventArgs e)
         {
-            inMinoBoard();
+            inMinoBoard(false);
             //書き出し
             Drow(board);
             //時間ごとに落ちる処理
@@ -306,8 +371,16 @@ namespace tetris
             {
                 minoConflict();
                 Drow(board);
+                minoErase();
                 //初期ボードに保存
-                shiftBoard(firstBoard, board);
+                shiftBoard(memoryBoard, board);
+                if (judge())
+                {
+                    timer.Stop();
+                    label.Text = "Press The Enter";
+                    MessageBox.Show("Game Over");
+                    return;
+                }
                 timer.Stop();
                 initialSet();
             }
@@ -334,49 +407,70 @@ namespace tetris
         //キーボードの処理
         private void keyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Right)
+            //エンターを押したとき
+            if (e.KeyCode == Keys.Enter)
             {
 
-                if(minoEnable(board, 0, 1)) minoCol++;
-                inMinoBoard();
+                shiftBoard(memoryBoard, firstBoard);
+                Drow(memoryBoard);
+                initialSet();
+                label.Text = "←:Left →:Right ↑:Rotation Enter:Reset";
+
+            }
+
+            if (e.KeyCode == Keys.Right)
+            {
+                if (minoEnable(board, 0, 1)) minoCol++;
+                inMinoBoard(false);
                 Drow(board);
             }
-            if(e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left)
             {
-                if(minoEnable(board, 0, -1)) minoCol--;
-                inMinoBoard();
+                if (minoEnable(board, 0, -1)) minoCol--;
+                inMinoBoard(false);
                 Drow(board);
-            }
-            if(e.KeyCode == Keys.Up)
+           }
+            if (e.KeyCode == Keys.Up)
             {
+                timer.Stop();
                 minoRotation = (minoRotation + 1) % 4;
-                inMinoBoard();
+                inMinoBoard(true);
                 Drow(board);
+                timer.Start();
             }
 
-            if(e.KeyCode == Keys.Down)
+            if (e.KeyCode == Keys.Down)
             {
                 while (minoEnable(board, 1, 0))
                 {
                     minoRow++;
-                    inMinoBoard();
+                    inMinoBoard(false);
                 }
                 minoConflict();
                 Drow(board);
-                shiftBoard(firstBoard, board);
+
+                minoErase();
+                shiftBoard(memoryBoard, board);
+                if (judge())
+                {
+                    timer.Stop();
+                    label.Text = "Press The Enter";
+                    MessageBox.Show("Game Over");
+                    return;
+                }
                 timer.Stop();
                 initialSet();
             }
         }
 
         //minoをboardに書き込む処理
-        public void inMinoBoard()
+        public void inMinoBoard(Boolean rotation)
         {
-            int[,] oneMino = new int[4,4];
+            int[,] oneMino = new int[4, 4];
 
             //初期化
-            shiftBoard(board, firstBoard);
-            
+            shiftBoard(board, memoryBoard);
+
 
             //まわりの0を消すために選択したminoを取り出す
             for (int i = 0; i < mino.GetLength(2); i++)
@@ -394,56 +488,112 @@ namespace tetris
             {
                 for (int j = 0; j < selectMino.GetLength(1); j++)
                 {
-                    if (selectMino[i, j] != 0) board[i + minoRow, j + minoCol] = selectMino[i, j];
+                    //代入するミノの0以外の場合のみ
+                    if (selectMino[i, j] != 0)
+                    {
+                        if (rotation)
+                        {
+                            //回転の時の処理
+                            //回転した時にboard内が0ではない場合
+                            if (i + minoRow < board.GetLength(0) && j + minoCol < board.GetLength(1))
+                            {
+                                if (board[i + minoRow, j + minoCol] != 0)
+                                {
+                                    //Iミノの時の処理
+                                    if (randomMino == 1)
+                                    {
+                                        int minoRotRow, minoRotCol;
+                                        bool minoRotEnable = false;
+                                        for (int k = 0; k < srsIMino.GetLength(1); k++)
+                                        {
+                                            minoRotRow = minoRow;
+                                            minoRotCol = minoCol;
+                                            minoRotRow = minoRotRow + srsIMino[minoRotation, k, 0];
+                                            minoRotCol = minoRotCol + srsIMino[minoRotation, k, 1];
+                                            if (board[i + minoRow, j + minoCol] != 0)
+                                            {
+                                                minoRotEnable = true;
+                                                break;
+                                            }
+
+                                        }
+
+                                        if (minoRotEnable)
+                                        {
+                                            board[i + minoRow, j + minoCol] = selectMino[i, j];
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            minoRotation = (minoRotation + 3) % 4;
+                                            break;
+                                        }
+                                    }
+                                    //それ以外のミノの時の処理
+                                    else
+                                    {
+                                        int minoRotRow, minoRotCol;
+                                        bool minoRotEnable = false;
+                                        for (int k = 0; k < srsMino.GetLength(1); k++)
+                                        {
+                                            minoRotRow = minoRow;
+                                            minoRotCol = minoCol;
+                                            minoRotRow = minoRotRow + srsMino[minoRotation, k, 0];
+                                            minoRotCol = minoRotCol + srsMino[minoRotation, k, 1];
+                                            if (board[i + minoRow, j + minoCol] != 0)
+                                            {
+                                                minoRotEnable = true;
+                                                break;
+                                            }
+
+                                        }
+
+                                        if (minoRotEnable) board[i + minoRow, j + minoCol] = selectMino[i, j];
+                                        else minoRotation = (minoRotation + 3) % 4;
+                                    }
+                                }
+                            }
+                        }
+                        board[i + minoRow, j + minoCol] = selectMino[i, j];
+                    }
                 }
             }
         }
 
-        //指定されたminoの周りの0を消す
+        //Iミノ以外を3×3の行列にする
         public void minoTransform(int[,] oneMino)
         {
+            int newRow, newCol;
+            newRow = oneMino.GetLength(0);
+            newCol = oneMino.GetLength(1);
 
-            // 非ゼロの行と列の範囲を見つける
-            int minRow = int.MaxValue;
-            int maxRow = int.MinValue;
-            int minCol = int.MaxValue;
-            int maxCol = int.MinValue;
-
-            for (int i = 0; i < oneMino.GetLength(0); i++)
+            //Iミノ以外は行列の幅を減らす
+            if (randomMino != 1)
             {
-                for (int j = 0; j < oneMino.GetLength(1); j++)
-                {
-                    if (oneMino[i, j] != 0)
-                    {
-                        minRow = Math.Min(minRow, i);
-                        maxRow = Math.Max(maxRow, i);
-                        minCol = Math.Min(minCol, j);
-                        maxCol = Math.Max(maxCol, j);
-                    }
-                }
+                newRow--;
+                newCol--;
             }
+            selectMino = new int[newRow,newCol];
 
-            // 非ゼロの範囲内の要素を新しい配列にコピーする
-            selectMino = new int[maxRow - minRow + 1, maxCol - minCol + 1];
-
-            for (int i = minRow; i <= maxRow; i++)
+            //変換する処理
+            for (int i = (oneMino.GetLength(0) - newRow); i < oneMino.GetLength(0); i++)
             {
-                for (int j = minCol; j <= maxCol; j++)
+                for (int j = 0; j < newCol; j++)
                 {
-                    selectMino[i - minRow, j - minCol] = oneMino[i, j];
+                    selectMino[i - (oneMino.GetLength(0) - newRow), j] = oneMino[i, j];
                 }
             }
         }
 
         //4方向の当たり判定
-        public Boolean minoEnable(int[,] beforeBoard, int arowMino,int acolMino)
+        public Boolean minoEnable(int[,] beforeBoard, int arowMino, int acolMino)
         {
             List<int[]> canSlide = new List<int[]>();
-            for(int i = 0; i < beforeBoard.GetLength(0); i++)
+            for (int i = 0; i < beforeBoard.GetLength(0); i++)
             {
-                for(int j = 0; j < beforeBoard.GetLength(1); j++)
+                for (int j = 0; j < beforeBoard.GetLength(1); j++)
                 {
-                    if (beforeBoard[i,j] != 0 && beforeBoard[i, j] != 8)
+                    if (beforeBoard[i, j] != 0 && beforeBoard[i, j] != 8)
                     {
                         int[] addlist = { i, j };
                         canSlide.Add(addlist);
@@ -461,7 +611,7 @@ namespace tetris
                 }
             }
 
-            return true ;
+            return true;
         }
 
         //下に落ちたときに固まる処理
@@ -499,5 +649,50 @@ namespace tetris
                 }
             }
         }
+
+        //一列消す
+        public void minoErase()
+        {
+            //全ての列でカウント
+            for (int i = 1; i < board.GetLength(0) - 1; i++)
+            {
+                int eraseCount = 0;
+                for (int j = 1; j < board.GetLength(1) - 1; j++)
+                {
+                    if (board[i, j] == 8)
+                    {
+                        eraseCount++;
+                        //一列そろった時
+                        if (eraseCount >= 10)
+                        {
+                            for (int k = 1; k < board.GetLength(1) - 1; k++)
+                            {
+                                board[i, k] = 0;
+                                for (int l = i; l > 0; l--)
+                                {
+                                    board[l, k] = board[(l - 1), k];
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            //描画
+            Drow(board);
+        }
+
+        public Boolean judge()
+        {
+            for (int i = 1; i < board.GetLength(1) - 1; i++)
+            {
+                if (board[0, i] == 8)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 }
