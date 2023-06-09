@@ -5,7 +5,7 @@ namespace tetris
 {
     public partial class Form1 : Form
     {
-        public int minoRow, minoCol, minoRotation, randomMino;
+        public int minoRow, minoCol, minoRotation, randomMino, minoRotRow, minoRotCol;
         public int[,] firstBoard = new int[22, 12]
             {
                 { 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8 },
@@ -338,6 +338,8 @@ namespace tetris
             {minoColor.boarder, Color.Black}
         };
 
+        public Boolean minoRotEnable;
+
         public Form1()
         {
             InitializeComponent();
@@ -502,8 +504,7 @@ namespace tetris
                                     //IÉ~ÉmÇÃéûÇÃèàóù
                                     if (randomMino == 1)
                                     {
-                                        int minoRotRow, minoRotCol;
-                                        bool minoRotEnable = false;
+                                        minoRotEnable = false;
                                         for (int k = 0; k < srsIMino.GetLength(1); k++)
                                         {
                                             minoRotRow = minoRow;
@@ -520,7 +521,8 @@ namespace tetris
 
                                         if (minoRotEnable)
                                         {
-                                            board[i + minoRow, j + minoCol] = selectMino[i, j];
+                                            minoRow = minoRotRow;
+                                            minoCol = minoRotCol;
                                             break;
                                         }
                                         else
@@ -532,8 +534,7 @@ namespace tetris
                                     //ÇªÇÍà»äOÇÃÉ~ÉmÇÃéûÇÃèàóù
                                     else
                                     {
-                                        int minoRotRow, minoRotCol;
-                                        bool minoRotEnable = false;
+                                        minoRotEnable = false;
                                         for (int k = 0; k < srsMino.GetLength(1); k++)
                                         {
                                             minoRotRow = minoRow;
@@ -548,13 +549,23 @@ namespace tetris
 
                                         }
 
-                                        if (minoRotEnable) board[i + minoRow, j + minoCol] = selectMino[i, j];
-                                        else minoRotation = (minoRotation + 3) % 4;
+                                        if (minoRotEnable)
+                                        {
+                                            minoRow = minoRotRow;
+                                            minoCol = minoRotCol;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            minoRotation = (minoRotation + 3) % 4;
+                                            break;
+                                        }
                                     }
                                 }
                             }
+                        break;
                         }
-                        board[i + minoRow, j + minoCol] = selectMino[i, j];
+                    board[i + minoRow, j + minoCol] = selectMino[i, j];
                     }
                 }
             }
