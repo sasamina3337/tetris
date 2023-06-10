@@ -451,26 +451,30 @@ namespace tetris
                             break;
                         //âE
                         case Keys.Right:
+                            if (judge()) break;
                             if (minoEnable(board, 0, 1)) minoCol++;
                             inMinoBoard(false);
                             Drow(board);
                             break;
                         //ç∂
                         case Keys.Left:
+                            if (judge()) break;
                             if (minoEnable(board, 0, -1)) minoCol--;
                             inMinoBoard(false);
                             Drow(board);
                             break;
                         //è„
                         case Keys.Up:
+                            if (judge()) break;
                             timer.Stop();
                             minoRotation = (minoRotation + 1) % 4;
                             inMinoBoard(true);
                             Drow(board);
                             timer.Start();
                             break;
+                        //â∫
                         case Keys.Down:
-                            //â∫
+                            if (judge()) break;
                             while (minoEnable(board, 1, 0))
                             {
                                 minoRow++;
