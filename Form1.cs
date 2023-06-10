@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 using static tetris.Form1;
 
@@ -447,7 +448,18 @@ namespace tetris
                             shiftBoard(memoryBoard, firstBoard);
                             Drow(memoryBoard);
                             initialSet();
-                            label.Text = "Å©:Left Å®:Right Å™:Rotation Enter:Reset";
+                            string[,] explain = new string[5, 2]{{"\u2190" , "Left"},
+                                                                {"\u2192" , "Right"},
+                                                                {"\u2191","Rotation" },
+                                                                {"\u2193", "Hard Drop"},
+                                                                {"Enter","Reset" }
+                                                                };
+                            StringBuilder explainText = new StringBuilder();
+                            for (int i = 0; i < explain.GetLength(0); i++)
+                            {
+                                explainText.Append(explain[i, 0]).Append(":").Append(explain[i, 1]).Append(" ");
+                            }
+                            label.Text = explainText.ToString();
                             break;
                         //âE
                         case Keys.Right:

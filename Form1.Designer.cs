@@ -3079,10 +3079,10 @@
             // label
             // 
             this.label.Font = (new global::System.Drawing.Font("Palatino Linotype", 12F, global::System.Drawing.FontStyle.Regular, global::System.Drawing.GraphicsUnit.Point));
-            this.label.Location = (new global::System.Drawing.Point(12, 50));
+            this.label.Location = (new global::System.Drawing.Point(1, 60));
             this.label.Name = ("label");
             this.label.RightToLeft = (global::System.Windows.Forms.RightToLeft.Yes);
-            this.label.Size = (new global::System.Drawing.Size(513, 34));
+            this.label.Size = (new global::System.Drawing.Size(529, 22));
             this.label.TabIndex = (265);
             this.label.Text = ("Press The Enter");
             this.label.TextAlign = (global::System.Drawing.ContentAlignment.MiddleCenter);
