@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Data;
 using System.Windows.Forms;
+using static tetris.Form1;
 
 namespace tetris
 {
@@ -384,6 +385,7 @@ namespace tetris
                     timer.Stop();
                     label.Text = "Press The Enter";
                     MessageBox.Show("Game Over");
+
                     return;
                 }
                 timer.Stop();
@@ -599,9 +601,8 @@ namespace tetris
                                     }
                                 }
                             }
-                            break;
                         }
-                        else board[i + minoRow, j + minoCol] = selectMino[i, j];
+                    board[i + minoRow, j + minoCol] = selectMino[i, j];
                     }
                 }
             }
