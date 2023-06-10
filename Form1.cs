@@ -669,12 +669,16 @@ namespace tetris
             {
                 int selectRow = canSlide[i][0];
                 int selectCol = canSlide[i][1];
-                if ((beforeBoard[(selectRow + arowMino), (selectCol + acolMino)]) == 8)
+
+                // Check if indices are within bounds
+                if (selectRow + arowMino >= 0 && selectRow + arowMino < board.GetLength(0) && selectCol + acolMino >= 0 && selectCol + acolMino < board.GetLength(1))
                 {
-                    return false;
+                    if ((beforeBoard[(selectRow + arowMino), (selectCol + acolMino)]) == 8)
+                    {
+                        return false;
+                    }
                 }
             }
-
             return true;
         }
 
