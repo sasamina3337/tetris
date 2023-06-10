@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using System.Data;
+using System.Windows.Forms;
 
 namespace tetris
 {
@@ -340,6 +341,8 @@ namespace tetris
 
         public Boolean minoRotEnable;
 
+        private static List<Keys> keyList = new List<Keys>();
+
         public Form1()
         {
             InitializeComponent();
@@ -406,62 +409,89 @@ namespace tetris
             }
         }
 
-        //キーボードの処理
+        //キーボードが押されときの処理
+        private void keyDown(object sender, KeyEventArgs e)
+        {
+            if (!keyList.Contains(e.KeyCode))
+            {
+                keyTimer.Start();
+                keyList.Add(e.KeyCode);
+            }
+        }
+
+        //キーボードが持ち上がっときの処理
         private void keyUp(object sender, KeyEventArgs e)
         {
-            //エンターを押したとき
-            if (e.KeyCode == Keys.Enter)
+            if (keyList.Contains(e.KeyCode))
             {
-
-                shiftBoard(memoryBoard, firstBoard);
-                Drow(memoryBoard);
-                initialSet();
-                label.Text = "←:Left →:Right ↑:Rotation Enter:Reset";
-
+                keyTimer.Stop();
+                keyList.Remove(e.KeyCode);
             }
+        }
 
-            if (e.KeyCode == Keys.Right)
+        //キーボードのの処理のタイマー
+        private void pressKey(object sender, EventArgs e)
+        {
+            //keyの処理
+            if (keyList.Count > 0)
             {
-                if (minoEnable(board, 0, 1)) minoCol++;
-                inMinoBoard(false);
-                Drow(board);
-            }
-            if (e.KeyCode == Keys.Left)
-            {
-                if (minoEnable(board, 0, -1)) minoCol--;
-                inMinoBoard(false);
-                Drow(board);
-           }
-            if (e.KeyCode == Keys.Up)
-            {
-                timer.Stop();
-                minoRotation = (minoRotation + 1) % 4;
-                inMinoBoard(true);
-                Drow(board);
-                timer.Start();
-            }
-
-            if (e.KeyCode == Keys.Down)
-            {
-                while (minoEnable(board, 1, 0))
+                Keys pressKey = keyList[0];
+                if (keyList.Contains(pressKey))
                 {
-                    minoRow++;
-                    inMinoBoard(false);
-                }
-                minoConflict();
-                Drow(board);
+                    switch (pressKey)
+                    {
+                        //エンター
+                        case Keys.Enter:
+                            shiftBoard(memoryBoard, firstBoard);
+                            Drow(memoryBoard);
+                            initialSet();
+                            label.Text = "←:Left →:Right ↑:Rotation Enter:Reset";
+                            break;
+                        //右
+                        case Keys.Right:
+                            if (minoEnable(board, 0, 1)) minoCol++;
+                            inMinoBoard(false);
+                            Drow(board);
+                            break;
+                        //左
+                        case Keys.Left:
+                            if (minoEnable(board, 0, -1)) minoCol--;
+                            inMinoBoard(false);
+                            Drow(board);
+                            break;
+                        //上
+                        case Keys.Up:
+                            timer.Stop();
+                            minoRotation = (minoRotation + 1) % 4;
+                            inMinoBoard(true);
+                            Drow(board);
+                            timer.Start();
+                            break;
+                        case Keys.Down:
+                            //下
+                            while (minoEnable(board, 1, 0))
+                            {
+                                minoRow++;
+                                inMinoBoard(false);
+                            }
+                            minoConflict();
+                            Drow(board);
 
-                minoErase();
-                shiftBoard(memoryBoard, board);
-                if (judge())
-                {
-                    timer.Stop();
-                    label.Text = "Press The Enter";
-                    MessageBox.Show("Game Over");
-                    return;
+                            minoErase();
+                            shiftBoard(memoryBoard, board);
+                            if (judge())
+                            {
+                                timer.Stop();
+                                label.Text = "Press The Enter";
+                                MessageBox.Show("Game Over");
+                                return;
+                            }
+                            timer.Stop();
+                            initialSet();
+                            break;
+                    }
+                    keyList.Remove(pressKey);
                 }
-                timer.Stop();
-                initialSet();
             }
         }
 
@@ -511,7 +541,7 @@ namespace tetris
                                             minoRotCol = minoCol;
                                             minoRotRow = minoRotRow + srsIMino[minoRotation, k, 0];
                                             minoRotCol = minoRotCol + srsIMino[minoRotation, k, 1];
-                                            if (i + minoRow > 0 && i + minoRow < board.GetLength(0) && minoCol + j > 0 && minoCol + j < board.GetLength(1))
+                                            if (i + minoRotRow > 0 && i + minoRotRow < board.GetLength(0) && minoRotCol + j > 0 && minoRotCol + j < board.GetLength(1))
                                             {
                                                 if (board[i + minoRotRow, j + minoRotCol] == 0)
                                                 {
@@ -569,9 +599,9 @@ namespace tetris
                                     }
                                 }
                             }
-                        break;
+                            break;
                         }
-                    board[i + minoRow, j + minoCol] = selectMino[i, j];
+                        else board[i + minoRow, j + minoCol] = selectMino[i, j];
                     }
                 }
             }
@@ -590,7 +620,7 @@ namespace tetris
                 newRow--;
                 newCol--;
             }
-            selectMino = new int[newRow,newCol];
+            selectMino = new int[newRow, newCol];
 
             //変換する処理
             for (int i = (oneMino.GetLength(0) - newRow); i < oneMino.GetLength(0); i++)
@@ -710,6 +740,5 @@ namespace tetris
             }
             return false;
         }
-
     }
 }

@@ -284,6 +284,7 @@
             this.timer = (new global::System.Windows.Forms.Timer(this.components));
             this.T = (new global::System.Windows.Forms.Label());
             this.label = (new global::System.Windows.Forms.Label());
+            this.keyTimer = (new global::System.Windows.Forms.Timer(this.components));
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
@@ -3086,6 +3087,11 @@
             this.label.Text = ("Press The Enter");
             this.label.TextAlign = (global::System.Drawing.ContentAlignment.MiddleCenter);
             // 
+            // keyTimer
+            // 
+            this.keyTimer.Interval = (70);
+            this.keyTimer.Tick += (this.pressKey);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = (new global::System.Drawing.SizeF(7F, 15F));
@@ -3347,6 +3353,7 @@
             this.Controls.Add(this.pictureBox12);
             this.Name = ("Form1");
             this.Text = ("Form1");
+            this.KeyDown += (this.keyDown);
             this.KeyUp += (this.keyUp);
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((global::System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
@@ -3860,5 +3867,6 @@
         private global::System.Windows.Forms.Timer timer;
         private global::System.Windows.Forms.Label T;
         private global::System.Windows.Forms.Label label;
+        private global::System.Windows.Forms.Timer keyTimer;
     }
 }
