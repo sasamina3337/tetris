@@ -511,10 +511,13 @@ namespace tetris
                                             minoRotCol = minoCol;
                                             minoRotRow = minoRotRow + srsIMino[minoRotation, k, 0];
                                             minoRotCol = minoRotCol + srsIMino[minoRotation, k, 1];
-                                            if (board[i + minoRow, j + minoCol] != 0)
+                                            if (i + minoRow > 0 && i + minoRow < board.GetLength(0) && minoCol + j > 0 && minoCol + j < board.GetLength(1))
                                             {
-                                                minoRotEnable = true;
-                                                break;
+                                                if (board[i + minoRotRow, j + minoRotCol] == 0)
+                                                {
+                                                    minoRotEnable = true;
+                                                    break;
+                                                }
                                             }
 
                                         }
@@ -541,10 +544,13 @@ namespace tetris
                                             minoRotCol = minoCol;
                                             minoRotRow = minoRotRow + srsMino[minoRotation, k, 0];
                                             minoRotCol = minoRotCol + srsMino[minoRotation, k, 1];
-                                            if (board[i + minoRow, j + minoCol] != 0)
+                                            if (i + minoRotRow > 0 && i + minoRotRow < board.GetLength(0) && minoRotCol + j > 0 && minoRotCol + j < board.GetLength(1))
                                             {
-                                                minoRotEnable = true;
-                                                break;
+                                                if (board[i + minoRotRow, j + minoRotCol] == 0)
+                                                {
+                                                    minoRotEnable = true;
+                                                    break;
+                                                }
                                             }
 
                                         }
