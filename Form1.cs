@@ -606,7 +606,7 @@ namespace tetris
                                 }
                             }
                         }
-                    board[i + minoRow, j + minoCol] = selectMino[i, j];
+                        board[i + minoRow, j + minoCol] = selectMino[i, j];
                     }
                 }
             }

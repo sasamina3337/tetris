@@ -3089,7 +3089,7 @@
             // 
             // keyTimer
             // 
-            this.keyTimer.Interval = (70);
+            this.keyTimer.Interval = (20);
             this.keyTimer.Tick += (this.pressKey);
             // 
             // Form1
