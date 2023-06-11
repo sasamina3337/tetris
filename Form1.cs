@@ -538,15 +538,15 @@ namespace tetris
             {
                 for (int j = 0; j < selectMino.GetLength(1); j++)
                 {
-                    //‘ã“ü‚·‚éƒ~ƒm‚Ì0ˆÈŠO‚Ìê‡‚Ì‚Ý
-                    if (selectMino[i, j] != 0)
+                    if (i + minoRow >= 0 && i + minoRow < board.GetLength(0) && j + minoCol >= 0 && j + minoCol < board.GetLength(1))
                     {
-                        if (rotation)
+                        //‘ã“ü‚·‚éƒ~ƒm‚Ì0ˆÈŠO‚Ìê‡‚Ì‚Ý
+                        if (selectMino[i, j] != 0)
                         {
-                            //‰ñ“]‚ÌŽž‚Ìˆ—
-                            //‰ñ“]‚µ‚½Žž‚Éboard“à‚ª0‚Å‚Í‚È‚¢ê‡
-                            if (i + minoRow < board.GetLength(0) && j + minoCol < board.GetLength(1))
+                            if (rotation)
                             {
+                                //‰ñ“]‚ÌŽž‚Ìˆ—
+                                //‰ñ“]‚µ‚½Žž‚Éboard“à‚ª0‚Å‚Í‚È‚¢ê‡
                                 if (board[i + minoRow, j + minoCol] != 0)
                                 {
                                     //Iƒ~ƒm‚ÌŽž‚Ìˆ—
@@ -617,8 +617,8 @@ namespace tetris
                                     }
                                 }
                             }
+                            board[i + minoRow, j + minoCol] = selectMino[i, j];
                         }
-                        board[i + minoRow, j + minoCol] = selectMino[i, j];
                     }
                 }
             }
@@ -670,7 +670,6 @@ namespace tetris
                 int selectRow = canSlide[i][0];
                 int selectCol = canSlide[i][1];
 
-                // Check if indices are within bounds
                 if (selectRow + arowMino >= 0 && selectRow + arowMino < board.GetLength(0) && selectCol + acolMino >= 0 && selectCol + acolMino < board.GetLength(1))
                 {
                     if ((beforeBoard[(selectRow + arowMino), (selectCol + acolMino)]) == 8)
